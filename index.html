@@ -439,6 +439,17 @@
             letter-spacing: 1px;
         }
 
+        /* 動態隱藏區塊 (地址欄位、飲食其他欄位) */
+        #address-field-group, #dietary-other-group {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .submit-btn-container {
             text-align: center;
             margin-top: 45px;
@@ -798,7 +809,7 @@
             </div>
             
             <div class="mob-transport-content" id="mobTransportContent">
-                <p><strong>捷運：</strong>紅線「捷運士林站」2號出口，步行約 5 分鐘即可抵達。</p>
+                <p><strong>捷運：</strong>紅線<span>「捷運士林站」</span>2號出口，步行約 5 分鐘即可抵達。</p>
                 <p><strong>開車：</strong>飯店設有地下停車場，請於離場時至招待桌領取停車折抵。</p>
             </div>
 
@@ -832,7 +843,7 @@
         </div>
 
         <div class="rsvp-card-glass">
-            <!-- 採用隱藏 iframe 解決 CORS 跨域問題，直接完美送入 Google 表單 -->
+            <!-- 採用隱藏 iframe 解決 CORS 跨域問題 -->
             <form id="rsvpForm" action="https://docs.google.com/forms/d/e/1FAIpQLSe-idpi_fNAr17N1fPW4aF88gNNwXDyx6FAayLoGVoiM-STBQ/formResponse" method="POST" target="hidden_iframe">
                 
                 <div class="form-group">
@@ -872,14 +883,21 @@
                     </div>
                 </div>
 
+                <!-- 飲食需求 (含「其他」連動輸入框) -->
                 <div class="form-group">
                     <label>飲食需求 <span class="en">DIETARY</span></label>
-                    <select name="entry.2076817075" required>
+                    <select name="entry.2076817075" id="dietarySelect" required>
                         <option value="" disabled selected>請選擇飲食需求</option>
                         <option value="葷食（正常，無特殊禁忌）">葷食（正常，無特殊禁忌）</option>
                         <option value="素食">素食</option>
-                        <option value="其他：">其他</option>
+                        <option value="__other_option__">其他</option>
                     </select>
+                </div>
+
+                <!-- 當選擇「其他」時自動顯示的自訂輸入框 -->
+                <div class="form-group" id="dietary-other-group">
+                    <label>請註明飲食需求 <span class="en">SPECIFY DIETARY</span></label>
+                    <input type="text" name="entry.2076817075.other_option_response" id="dietaryOtherInput" placeholder="例如：不吃牛、不吃海鮮等">
                 </div>
 
                 <div class="form-group">
@@ -895,7 +913,7 @@
                     <label>喜帖寄送方式（可複選） <span class="en">INVITATION TYPE</span></label>
                     <div class="checkbox-group">
                         <label class="checkbox-item">
-                            <input type="checkbox" name="entry.1214037399" value="紙本喜帖">
+                            <input type="checkbox" name="entry.1214037399" value="紙本喜帖" id="paperInviteCheckbox">
                             <span class="checkbox-text">紙本喜帖</span>
                         </label>
                         <label class="checkbox-item">
@@ -905,9 +923,10 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <!-- 只有勾選紙本喜帖才會出現的地址欄位 -->
+                <div class="form-group" id="address-field-group">
                     <label>紙本喜帖地址 <span class="en">ADDRESS</span></label>
-                    <input type="text" name="entry.2001038655" placeholder="如單選電子喜帖可跳過">
+                    <input type="text" name="entry.2001038655" id="addressInput" placeholder="請輸入收件地址">
                 </div>
 
                 <div class="form-group" style="margin-bottom: 20px;">
@@ -922,7 +941,7 @@
         </div>
     </section>
 
-    <!-- 隱藏的 iframe 用於接收 Google 表單提交結果，避免 CORS 錯誤 -->
+    <!-- 隱藏的 iframe 用於接收 Google 表單提交結果 -->
     <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(window.submitted) { alert('感謝您的回覆，我們已收到您的祝福！期待與您分享這份喜悅！'); window.location.reload(); }"></iframe>
 
     <!-- 結尾照片 -->
@@ -931,7 +950,39 @@
     </div>
 
     <script>
-        // 處理表單送出狀態
+        // 1. 處理紙本喜帖勾選連動地址欄位顯示/隱藏
+        const paperCheckbox = document.getElementById('paperInviteCheckbox');
+        const addressGroup = document.getElementById('address-field-group');
+        const addressInput = document.getElementById('addressInput');
+
+        paperCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                addressGroup.style.display = 'block';
+                addressInput.setAttribute('required', 'required');
+            } else {
+                addressGroup.style.display = 'none';
+                addressInput.removeAttribute('required');
+                addressInput.value = '';
+            }
+        });
+
+        // 2. 處理飲食需求選到「其他」時連動自訂輸入框顯示/隱藏
+        const dietarySelect = document.getElementById('dietarySelect');
+        const dietaryOtherGroup = document.getElementById('dietary-other-group');
+        const dietaryOtherInput = document.getElementById('dietaryOtherInput');
+
+        dietarySelect.addEventListener('change', function() {
+            if (this.value === '__other_option__') {
+                dietaryOtherGroup.style.display = 'block';
+                dietaryOtherInput.setAttribute('required', 'required');
+            } else {
+                dietaryOtherGroup.style.display = 'none';
+                dietaryOtherInput.removeAttribute('required');
+                dietaryOtherInput.value = '';
+            }
+        });
+
+        // 3. 處理表單送出狀態
         window.submitted = false;
         document.getElementById('rsvpForm').addEventListener('submit', function() {
             const btn = document.getElementById('submitBtn');
