@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charlie & Livia Wedding</title>
+    <!-- 引入 Antic Didone, Forum, Noto Serif TC, Cormorant Garamond 字體 -->
+    <link href="https://fonts.googleapis.com/css2?family=Antic+Didone&family=Forum&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Noto+Serif+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: rgb(212, 163, 115);   
+            --secondary: #8da399; 
+            --bg: #fcfbf9;        
+            --text-dark: #333333; 
+            --text-light: #7a7a7a;
+            --border-color: #d6d6d6;
+            --countdown-red: #770000; /* 指定的倒數數字色號 */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Noto Serif TC', serif;
+            font-weight: 400; 
+            background-color: var(--bg);
+            color: var(--text-dark);
+            line-height: 1.8;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, .serif-en {
+            font-family: 'Cormorant Garamond', serif; 
+            font-weight: 600;
+        }
+
+        /* ========================================= */
+        /* 1. 第一屏封面 (KV 區) */
+        /* ========================================= */
+        .hero {
+            height: 100vh;
+            background-image: url('https://github.com/user-attachments/assets/39e2f224-7c6a-4d9c-af32-83fd4557359a');
+            background-size: cover;
+            background-position: center center; 
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; 
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-top-title {
+            position: absolute;
+            top: 3vh; 
+            left: 0;
+            width: 100%;
+            z-index: 2;
+            font-family: 'Forum', serif; 
+            font-size: 1.5rem;
+            letter-spacing: 5px;
+            color: #ffffff;
+            font-weight: 400;
+        }
+
+        .hero-date-container {
+            position: absolute;
+            top: 42%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            width: 140px; 
+            max-width: 80%;
+        }
+
+        .hero-date-img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* 第一屏 PC 版標語 */
+        .hero-quote-pc {
+            position: absolute;
+            bottom: 6vh;
+            right: 5vw;
+            z-index: 2;
+            font-family: 'Noto Serif TC', serif;
+            font-size: 15px; 
+            font-weight: 700;  
+            color: #ffffff;
+            text-align: right;
+            line-height: 1.6;
+            white-space: nowrap;
+            display: block; 
+        }
+
+        .hero-quote-mobile {
+            display: none; 
+        }
+
+        /* ========================================= */
+        /* 2. 第二屏：復古雜誌倒數計時卡片區塊 */
+        /* ========================================= */
+        .countdown-section {
+            padding: 90px 20px 40px 20px;
+            background-color: var(--bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .countdown-card-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 1100px; 
+        }
+
+        .countdown-card-img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* PC版：靜態文案 (left: 170px) */
+        .countdown-static-text {
+            position: absolute;
+            top: 75px;
+            left: 170px; 
+            text-align: left;
+            font-family: 'Noto Serif TC', serif;
+            font-size: 15px; 
+            font-weight: 700;  
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* PC版：倒數模組 (left: 170px) */
+        .countdown-timer-box {
+            position: absolute;
+            top: 135px; 
+            left: 170px; 
+            display: flex;
+            gap: 38px; 
+            align-items: flex-end;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .countdown-item {
+            text-align: center; 
+            min-width: 55px; 
+        }
+
+        .countdown-num {
+            font-size: 52px; 
+            font-weight: 600;
+            color: var(--countdown-red); /* #770000 */
+            line-height: 1;
+            font-variant-numeric: tabular-nums; 
+        }
+
+        .countdown-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--countdown-red);
+            margin-top: 6px;
+            font-weight: 600;
+        }
+
+        /* ========================================= */
+        /* 3. 第三屏：Wedding Day 全新美感排版 */
+        /* ========================================= */
+        .wedding-day-section {
+            padding: 60px 20px 80px 20px;
+            background-color: var(--bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .wedding-timeline-pc {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 100%;
+            max-width: 920px; 
+            margin: 0 auto;
+        }
+
+        .pc-left-column {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        /* Wedding Day 圖片齊左 */
+        .pc-wday-header {
+            width: 420px;
+            height: auto;
+            margin-bottom: 18px;
+            display: block;
+            margin-left: -18px; 
+        }
+
+        /* 日期圖片精準對齊 */
+        .pc-wday-date-img {
+            width: 270px;
+            height: auto;
+            margin-bottom: 6px;
+            display: block;
+            margin-left: -27px; 
+        }
+
+        /* 台北士林萬麗酒店文字 */
+        .pc-hotel-text {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            letter-spacing: 2px;
+            margin-bottom: 40px; 
+            margin-left: 0;
+        }
+
+        /* 下方三欄時程橫向排列 */
+        .pc-timeline-row {
+            display: flex;
+            gap: 50px;
+            justify-content: flex-start;
+        }
+
+        .pc-time-item {
+            text-align: left;
+        }
+
+        /* PC版時間圖片縮小 20% (76px) */
+        .pc-time-img {
+            width: 76px;
+            height: auto;
+            margin-top: 0px;
+            margin-bottom: 12px; 
+            display: block;
+        }
+
+        /* 主標 */
+        .pc-time-title {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            letter-spacing: 2px;
+            margin-bottom: 0px; 
+        }
+
+        /* 副標往上移 2px */
+        .pc-time-loc {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 0.95rem;
+            color: var(--text-light);
+            letter-spacing: 1px;
+            margin-top: -2px; 
+        }
+        .pc-time-loc .en-didone {
+            font-family: 'Antic Didone', serif;
+            font-size: 1.05rem;
+        }
+
+        /* 右側插圖放大 15% 且上移 8px */
+        .pc-right-banquet {
+            width: 500px;
+            height: auto;
+            display: block;
+            flex-shrink: 0;
+            margin-top: 17px; 
+        }
+
+        /* 手機版：直式上下單欄排列 */
+        .wedding-timeline-mobile {
+            display: none;
+        }
+
+        /* ========================================= */
+        /* 4. 全新沉浸式 RSVP 區塊 (底色 #0e1017) */
+        /* ========================================= */
+        .rsvp-section-immersive {
+            position: relative;
+            background-color: #0e1017;
+            background-repeat: no-repeat;
+            background-position: center bottom;
+            background-size: 100% auto;
+            padding: 80px 20px 140px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .rsvp-header-box {
+            text-align: center;
+            margin-bottom: 35px;
+            z-index: 2;
+        }
+
+        /* RSVP 標準字放大 20% (原 132px * 1.2 = 約 158px) */
+        .rsvp-title-logo {
+            width: 158px;
+            max-width: 70%;
+            height: auto;
+            display: block;
+            margin: 0 auto 8px auto;
+            filter: brightness(0) invert(1); /* 轉成純白 */
+        }
+
+        /* 「希望這天也有你」字級與粗細與第一屏標語完全一致 (15px, 700) */
+        .rsvp-subtext {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 15px;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 2px;
+        }
+
+        /* 半透明霧面玻璃擬態卡片 */
+        .rsvp-card-glass {
+            background: rgba(245, 245, 247, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 28px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+            padding: 50px 45px;
+            width: 100%;
+            max-width: 650px;
+            text-align: left;
+            z-index: 2;
+        }
+
+        .form-group {
+            margin-bottom: 35px; 
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-family: 'Noto Serif TC', serif;
+            font-size: 0.85rem;
+            color: var(--text-light);
+            letter-spacing: 2px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .form-group label span.en {
+            margin-left: 6px;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px 0;
+            border: none;
+            border-bottom: 1px solid var(--border-color);
+            border-radius: 0;
+            font-family: 'Noto Serif TC', serif;
+            font-size: 1rem;
+            background: transparent;
+            color: var(--text-dark);
+            transition: border-color 0.3s;
+            -webkit-appearance: none;
+        }
+
+        select {
+            font-size: 0.85rem; 
+            color: var(--text-dark);
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #999999; 
+            font-size: 0.85rem; 
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-bottom: 1px solid var(--primary);
+        }
+
+        .form-row {
+            display: flex;
+            gap: 40px;
+        }
+
+        .form-col {
+            flex: 1;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px; 
+            margin-top: 10px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            margin-right: 12px;
+            border: 1px solid var(--border-color);
+            accent-color: var(--secondary);
+            cursor: pointer;
+            -webkit-appearance: auto;
+        }
+
+        .checkbox-text {
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            letter-spacing: 1px;
+        }
+
+        .submit-btn-container {
+            text-align: center;
+            margin-top: 45px;
+        }
+
+        .submit-btn {
+            display: inline-block;
+            width: auto;
+            min-width: 260px;
+            padding: 16px 40px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50px; 
+            font-size: 0.95rem;
+            font-weight: 600; 
+            letter-spacing: 4px;
+            cursor: pointer;
+            transition: opacity 0.3s, transform 0.2s;
+            font-family: 'Noto Serif TC', serif;
+            box-shadow: 0 4px 15px rgba(212, 163, 115, 0.4);
+        }
+
+        .submit-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .bottom-photo-section {
+            padding: 0 20px 100px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .bottom-image {
+            width: 100%;
+            height: auto;
+        }
+
+        /* ========================================= */
+        /* 手機版專屬優化 */
+        /* ========================================= */
+        @media (max-width: 768px) {
+            .hero {
+                background-image: url('https://github.com/user-attachments/assets/d0c17b1d-7f5b-446c-abac-0825c46b1cf9');
+                background-size: cover;
+                background-position: center center;
+                height: 100vh; 
+            }
+
+            .hero-top-title {
+                top: 4vh; 
+                font-size: 1.2rem;
+            }
+
+            .hero-date-container {
+                top: 50%;
+                transform: translate(-50%, -50%);
+                width: 104px; 
+            }
+
+            .hero-quote-pc {
+                display: none; 
+            }
+            .hero-quote-mobile {
+                position: absolute;
+                bottom: 5vh;
+                right: 6vw;
+                z-index: 2;
+                font-family: 'Noto Serif TC', serif;
+                font-size: 15px; 
+                font-weight: 700;  
+                color: #ffffff;
+                text-align: left; 
+                line-height: 1.6;
+                display: block; 
+            }
+
+            .countdown-section {
+                padding: 40px 15px 25px 15px;
+            }
+            .countdown-card-wrapper {
+                max-width: 100%;
+                width: 100%;
+                margin: 0 auto;
+            }
+            .countdown-static-text {
+                top: 13%;
+                left: 13%; 
+                font-size: 15px; 
+            }
+            .countdown-timer-box {
+                top: 25%;
+                left: 13%; 
+                gap: 5vw;
+                transform: scale(0.9);
+                transform-origin: top left;
+            }
+            .countdown-item {
+                min-width: 42px; 
+            }
+            .countdown-num {
+                font-size: 3.2rem;
+                font-variant-numeric: tabular-nums; 
+            }
+            .countdown-label {
+                font-size: 0.75rem;
+            }
+
+            .wedding-day-section {
+                padding: 40px 20px 60px 20px;
+            }
+            .wedding-timeline-pc {
+                display: none; 
+            }
+            .wedding-timeline-mobile {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                width: 100%;
+            }
+            .mob-wday-header {
+                width: 340px;
+                height: auto;
+                margin-bottom: 15px;
+                display: block;
+            }
+            .mob-wday-date-img {
+                width: 250px;
+                height: auto;
+                margin-bottom: 6px;
+                display: block;
+            }
+            .mob-hotel-text {
+                font-family: 'Noto Serif TC', serif;
+                font-size: 1.15rem;
+                font-weight: 700;
+                color: var(--text-dark);
+                letter-spacing: 2px;
+                margin-bottom: 6px; 
+            }
+
+            .mob-transport-toggle {
+                display: inline-block;
+                margin-top: -3px; 
+                margin-bottom: 30px;
+                font-size: 0.85rem;
+                color: var(--text-light); 
+                cursor: pointer;
+                border-bottom: 1px solid #eaeaea;
+                padding-bottom: 5px;
+                letter-spacing: 2px;
+                transition: color 0.3s;
+            }
+            .mob-transport-toggle .en {
+                font-family: 'Antic Didone', serif; 
+                font-size: 0.84rem; 
+                letter-spacing: 2px;
+            }
+            .mob-transport-toggle .arrow {
+                font-size: 0.7rem;
+                margin-left: 5px;
+                display: inline-block;
+                transition: transform 0.3s ease;
+            }
+            .mob-transport-toggle.active .arrow {
+                transform: rotate(180deg);
+            }
+
+            .mob-transport-content {
+                display: none; 
+                margin-top: 15px;
+                margin-bottom: 30px;
+                padding: 25px 20px; 
+                background-color: #f8f9f9; 
+                border-radius: 12px; 
+                text-align: left;
+                animation: fadeIn 0.4s;
+                width: 100%;
+                max-width: 360px;
+            }
+            .mob-transport-content p {
+                font-size: 0.9rem;
+                color: var(--text-light);
+                margin-bottom: 10px;
+            }
+
+            .mob-time-item {
+                margin-bottom: 35px;
+            }
+            .mob-time-img {
+                width: 78px;
+                height: auto;
+                margin-top: 10px;
+                margin-bottom: 12px; 
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .mob-time-title {
+                font-family: 'Noto Serif TC', serif;
+                font-size: 1.1rem;
+                font-weight: 700;
+                color: var(--text-dark);
+                letter-spacing: 2px;
+                margin-bottom: 0px;
+            }
+            .mob-time-loc {
+                font-family: 'Noto Serif TC', serif;
+                font-size: 0.9rem;
+                color: var(--text-light);
+                letter-spacing: 1px;
+                margin-top: -2px;
+            }
+            .mob-time-loc .en-didone {
+                font-family: 'Antic Didone', serif;
+                font-size: 1rem;
+            }
+            .mob-banquet-img {
+                width: 320px;
+                height: auto;
+                margin-top: -25px;
+                display: block;
+                margin-left: auto;
+                margin-right: 0;
+            }
+            
+            .rsvp-section-immersive {
+                background-image: url('https://github.com/user-attachments/assets/83c4db7d-f172-45ac-9a79-861da9961f92');
+                background-size: 100% auto;
+                background-position: center bottom;
+                padding: 50px 15px 460px 15px;
+            }
+
+            .rsvp-card-glass {
+                padding: 35px 25px;
+                border-radius: 20px;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .rsvp-section-immersive {
+                background-image: url('https://github.com/user-attachments/assets/ad941d4f-0120-4232-9a0b-89ddff6c0b94');
+                background-size: 100% auto;
+                background-position: center bottom;
+                padding: 100px 20px 200px 20px;
+            }
+
+            .rsvp-title-logo {
+                width: 260px;
+            }
+
+            .rsvp-subtext {
+                font-size: 15px;
+                font-weight: 700;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 第一屏封面 -->
+    <header class="hero" id="about">
+        <div class="hero-top-title">Charlie & Livia</div>
+        
+        <div class="hero-date-container">
+            <img src="https://github.com/user-attachments/assets/e4f20ead-0592-4396-bf8c-aabefa8012d7" alt="02.21.2027" class="hero-date-img">
+        </div>
+
+        <div class="hero-quote-pc">
+            原來有些相遇，比我們以為的更早
+        </div>
+
+        <div class="hero-quote-mobile">
+            原來有些相遇，<br>比我們以為的更早
+        </div>
+    </header>
+
+    <!-- 第二屏：復古雜誌倒數計時卡片 -->
+    <section class="countdown-section">
+        <div class="countdown-card-wrapper">
+            <img src="https://github.com/user-attachments/assets/08c35491-9c88-4c70-9442-ca1abc496aa1" alt="Card Background" class="countdown-card-img" id="cardBgImg">
+
+            <div class="countdown-static-text">
+                我們想把一些珍貴片段重新翻開<br>距離這一天，還有
+            </div>
+
+            <div class="countdown-timer-box" id="countdownTimer">
+                <div class="countdown-item">
+                    <div class="countdown-num" id="daysNum">--</div>
+                    <div class="countdown-label">DAYS</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-num" id="hoursNum">--</div>
+                    <div class="countdown-label">HRS</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-num" id="minsNum">--</div>
+                    <div class="countdown-label">MIN</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-num" id="secsNum">--</div>
+                    <div class="countdown-label">SEC</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 第三屏：Wedding Day 全新美感排版 -->
+    <section class="wedding-day-section">
+        
+        <!-- PC版橫式排版 -->
+        <div class="wedding-timeline-pc">
+            <div class="pc-left-column">
+                <img src="https://github.com/user-attachments/assets/4e16c00d-a7ae-410c-8732-628df01d146f" alt="Wedding Day" class="pc-wday-header">
+                <img src="https://github.com/user-attachments/assets/17534b1c-19bb-4294-b763-4ec195ae06ba" alt="2027.02.21 (日) 午宴" class="pc-wday-date-img">
+                <div class="pc-hotel-text">台北士林萬麗酒店</div>
+
+                <div class="pc-timeline-row">
+                    <div class="pc-time-item">
+                        <img src="https://github.com/user-attachments/assets/4eed68bd-1aa8-4f55-bae5-c4308f7eae5c" alt="11:00" class="pc-time-img">
+                        <div class="pc-time-title">證婚</div>
+                        <div class="pc-time-loc"><span class="en-didone">RF</span> 空中花園</div>
+                    </div>
+                    <div class="pc-time-item">
+                        <img src="https://github.com/user-attachments/assets/cbd23f2b-b157-42ca-b088-5d67b0d4f545" alt="11:40" class="pc-time-img">
+                        <div class="pc-time-title">餐前酒會</div>
+                        <div class="pc-time-loc"><span class="en-didone">2F</span> 宴會廳</div>
+                    </div>
+                    <div class="pc-time-item">
+                        <img src="https://github.com/user-attachments/assets/d8168111-a278-4779-8afa-059329fd7d0e" alt="12:30" class="pc-time-img">
+                        <div class="pc-time-title">準時開席</div>
+                        <div class="pc-time-loc"><span class="en-didone">2F</span> 宴會廳</div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <img src="https://github.com/user-attachments/assets/d2c3d58a-0639-40c3-a7c4-f95083bd754d" alt="Banquet Illustration" class="pc-right-banquet">
+            </div>
+        </div>
+
+        <!-- 手機版直式排版 -->
+        <div class="wedding-timeline-mobile">
+            <img src="https://github.com/user-attachments/assets/4e16c00d-a7ae-410c-8732-628df01d146f" alt="Wedding Day" class="mob-wday-header">
+            <img src="https://github.com/user-attachments/assets/17534b1c-19bb-4294-b763-4ec195ae06ba" alt="2027.02.21 (日) 午宴" class="mob-wday-date-img">
+            <div class="mob-hotel-text">台北士林萬麗酒店</div>
+
+            <div class="mob-transport-toggle" onclick="toggleMobTransport()">
+                交通指引 <span class="en">Transportation</span> <span class="arrow">▼</span>
+            </div>
+            
+            <div class="mob-transport-content" id="mobTransportContent">
+                <p><strong>捷運：</strong>紅線「捷運士林站」2號出口，步行約 5 分鐘即可抵達。</p>
+                <p><strong>開車：</strong>飯店設有地下停車場，請於離場時至招待桌領取停車折抵。</p>
+            </div>
+
+            <div class="mob-time-item">
+                <img src="https://github.com/user-attachments/assets/4eed68bd-1aa8-4f55-bae5-c4308f7eae5c" alt="11:00" class="mob-time-img">
+                <div class="mob-time-title">證婚</div>
+                <div class="mob-time-loc"><span class="en-didone">RF</span> 空中花園</div>
+            </div>
+
+            <div class="mob-time-item">
+                <img src="https://github.com/user-attachments/assets/cbd23f2b-b157-42ca-b088-5d67b0d4f545" alt="11:40" class="mob-time-img">
+                <div class="mob-time-title">餐前酒會</div>
+                <div class="mob-time-loc"><span class="en-didone">2F</span> 宴會廳</div>
+            </div>
+
+            <div class="mob-time-item">
+                <img src="https://github.com/user-attachments/assets/d8168111-a278-4779-8afa-059329fd7d0e" alt="12:30" class="mob-time-img">
+                <div class="mob-time-title">準時開席</div>
+                <div class="mob-time-loc"><span class="en-didone">2F</span> 宴會廳</div>
+            </div>
+
+            <img src="https://github.com/user-attachments/assets/d2c3d58a-0639-40c3-a7c4-f95083bd754d" alt="Banquet Illustration" class="mob-banquet-img">
+        </div>
+    </section>
+
+    <!-- 沉浸式 RSVP 出席回函區塊 -->
+    <section id="rsvp" class="rsvp-section-immersive">
+        <div class="rsvp-header-box">
+            <img src="https://github.com/user-attachments/assets/25313ed2-9137-4066-b2aa-78af380c3967" alt="RSVP" class="rsvp-title-logo">
+            <p class="rsvp-subtext">希望這天也有你</p>
+        </div>
+
+        <div class="rsvp-card-glass">
+            <!-- 採用隱藏 iframe 解決 CORS 跨域問題，直接完美送入 Google 表單 -->
+            <form id="rsvpForm" action="https://docs.google.com/forms/d/e/1FAIpQLSe-idpi_fNAr17N1fPW4aF88gNNwXDyx6FAayLoGVoiM-STBQ/formResponse" method="POST" target="hidden_iframe">
+                
+                <div class="form-group">
+                    <label>名字 <span class="en">NAME</span></label>
+                    <input type="text" name="entry.1801164509" required placeholder="請輸入名字"> 
+                </div>
+
+                <div class="form-group">
+                    <label>手機 <span class="en">PHONE NUMBER</span></label>
+                    <input type="tel" name="entry.1638580247" required placeholder="請輸入手機號碼"> 
+                </div>
+
+                <div class="form-group">
+                    <label>信箱 <span class="en">EMAIL</span></label>
+                    <input type="email" name="entry.499861683" required placeholder="example@gmail.com"> 
+                </div>
+
+                <div class="form-group">
+                    <label>與新人關係 <span class="en">RELATIONSHIP</span></label>
+                    <select name="entry.1721649734" required>
+                        <option value="" disabled selected>請選擇您的關係</option>
+                        <option value="男方家人親戚">男方家人親戚</option>
+                        <option value="女方家人親戚">女方家人親戚</option>
+                        <option value="男方好友">男方好友</option>
+                        <option value="女方好友">女方好友</option>
+                        <option value="男方同事">男方同事</option>
+                        <option value="女方同事">女方同事</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label>參加人數 <span class="en">GUESTS</span></label>
+                            <input type="number" name="entry.1302847197" min="0" required placeholder="0">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>飲食需求 <span class="en">DIETARY</span></label>
+                    <select name="entry.2076817075" required>
+                        <option value="" disabled selected>請選擇飲食需求</option>
+                        <option value="葷食（正常，無特殊禁忌）">葷食（正常，無特殊禁忌）</option>
+                        <option value="素食">素食</option>
+                        <option value="其他：">其他</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>兒童椅 <span class="en">BABY CHAIR</span></label>
+                    <select name="entry.755308040" required>
+                        <option value="" disabled selected>請選擇是否需要</option>
+                        <option value="需要">需要</option>
+                        <option value="不需要">不需要</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>喜帖寄送方式（可複選） <span class="en">INVITATION TYPE</span></label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="entry.1214037399" value="紙本喜帖">
+                            <span class="checkbox-text">紙本喜帖</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="entry.1214037399" value="電子喜帖">
+                            <span class="checkbox-text">電子喜帖</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>紙本喜帖地址 <span class="en">ADDRESS</span></label>
+                    <input type="text" name="entry.2001038655" placeholder="如單選電子喜帖可跳過">
+                </div>
+
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label>給新人的祝福 <span class="en">BLESSINGS</span></label>
+                    <textarea name="entry.98604473" placeholder="留下您的悄悄話..."></textarea>
+                </div>
+
+                <div class="submit-btn-container">
+                    <button type="submit" class="submit-btn" id="submitBtn">確認送出 SUBMIT</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- 隱藏的 iframe 用於接收 Google 表單提交結果，避免 CORS 錯誤 -->
+    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(window.submitted) { alert('感謝您的回覆，我們已收到您的祝福！期待與您分享這份喜悅！'); window.location.reload(); }"></iframe>
+
+    <!-- 結尾照片 -->
+    <div class="bottom-photo-section">
+        <img src="https://i.postimg.cc/d1VdxGM4/ART-1134.jpg" alt="Charlie & Livia" class="bottom-image">
+    </div>
+
+    <script>
+        // 處理表單送出狀態
+        window.submitted = false;
+        document.getElementById('rsvpForm').addEventListener('submit', function() {
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            btn.innerText = '傳送中...';
+            window.submitted = true;
+        });
+
+        /* 手機版第三屏交通指引開關函式 */
+        function toggleMobTransport() {
+            const content = document.getElementById('mobTransportContent');
+            const toggleBtn = document.querySelector('.mob-transport-toggle');
+            
+            if (content.style.display === 'block') {
+                content.style.display = 'none';
+                toggleBtn.classList.remove('active');
+            } else {
+                content.style.display = 'block';
+                toggleBtn.classList.add('active');
+            }
+        }
+
+        // RWD 動態切換卡片底圖
+        function updateCardImage() {
+            const cardImg = document.getElementById('cardBgImg');
+            if (window.innerWidth <= 768) {
+                cardImg.src = 'https://github.com/user-attachments/assets/793f7025-9789-4826-9b2a-1969a8dccfdd'; // 手機版底圖
+            } else {
+                cardImg.src = 'https://github.com/user-attachments/assets/08c35491-9c88-4c70-9442-ca1abc496aa1'; // PC版底圖
+            }
+        }
+        window.addEventListener('resize', updateCardImage);
+        window.addEventListener('DOMContentLoaded', updateCardImage);
+
+        // 倒數計時邏輯
+        const weddingDate = new Date("2027-02-21T12:00:00").getTime();
+        
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            if (distance < 0) {
+                document.getElementById("daysNum").innerText = "0";
+                document.getElementById("hoursNum").innerText = "0";
+                document.getElementById("minsNum").innerText = "0";
+                document.getElementById("secsNum").innerText = "0";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000); 
+
+            const format = (num) => num.toString().padStart(2, '0');
+
+            document.getElementById("daysNum").innerText = days;
+            document.getElementById("hoursNum").innerText = format(hours);
+            document.getElementById("minsNum").innerText = format(minutes);
+            document.getElementById("secsNum").innerText = format(seconds);
+        }
+        
+        setInterval(updateCountdown, 1000); 
+        updateCountdown(); 
+    </script>
+</body>
+</html>
